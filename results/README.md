@@ -14,8 +14,13 @@ I've drafted a preliminary plan below, and encourage participants to provide fee
 
 ### Working Draft Proposal for Formats of Outputs: Evidences
 * Comma delimited ASCII file (CSV)
-* One row/line per model (i.e., 0, 1, 2, and 3 planets)
+* One row/line for each estimate of the evidence for each model (i.e., 0, 1, 2, and 3 planets) 
 * Collumns:
+  - Method-specific integer roughly perportional to how much computational effort was used (e.g., number of itterations, number of model evaluations, CPU-seconds).  
+     + Note that this is effectively a label that allows one method to provide multiple estimates with more or less computational effort.  
+     + Estimates for the evidence, all parameter values, and/or odds ratios should be provided with the same values/labels.
+     + Nominal results for a given data set and model will be based on the entry with the largest value in this field.  Other results may be used to explore how rapidly a method is converging, but are unlikely to be explored during the EPRV3 meeting itself.
+     + If you can not provide any estimate of computational effort for some method, then report 0 in the column.
   - How many planets were used for this line (a single integer)
   - Mode of estimated distribution for the log_10(evidence) (may be best point estimate)
   - Median of estimated distribution for the log_10(evidence) (may be same as mode)
@@ -26,8 +31,9 @@ I've drafted a preliminary plan below, and encourage participants to provide fee
 
 ### Working Draft Proposal for Formats of Outputs: Parameter Estimates
 * Comma delimited ASCII file (CSV)
-* One row/line per parameter and model (i.e., 0, 1, 2, and 3 planets)
+* One row/line for each estimate of a parameter within a given model (i.e., 0, 1, 2, and 3 planets)
 * Collumns:
+  - Method-specific integer roughly perportional to how much computational effort was used (e.g., number of itterations, number of model evaluations, CPU-seconds; see details in specifications for files with evidence estimates).
   - Letter indicating which parameter is being estimated.  Options are:
       + P: Orbital Period
       + K: RV Amplitude
@@ -49,11 +55,31 @@ I've drafted a preliminary plan below, and encourage participants to provide fee
   - Estimate for 98% percentile of the distribution for this line's parameter (analogous to "2-sigma higher")
   
   
+### Working Draft Proposal for Formats of Benchmarking Results
+* Comma delimited ASCII file (CSV)
+* One row/line for each estimate of the evidecne for each model (i.e., 0, 1, 2, and 3 planets) 
+* Collumns:
+  - Method-specific integer roughly perportional to how much computational effort was used (e.g., number of itterations, number of model evaluations, CPU-seconds; see details in specifications for files with evidence estimates).
+  - number of evaluations of the full likelihood performed
+  - number of evaluations of the gradient of the likelihood performed (probably 0 for most entries)
+  - number of evaluations of the hessian of the likelihood performed (probably 0 for most entries)
+  - number of evaluations of any other computationally significant part of your algorithm (e.g., large matrix inversions; probably 0 formost entries)
+  - core-seconds used
+  - number of cores used (likely 1 for many entries)
+  - wall clock time in seconds (only different if algorithm is parallelized)
+* For benchmarking results, report NaN if number of evaluations and/or timing is not avaliable.  
+* Ideally, different groups would report estimates that made use of a similar computational cost.  
+* For algorithms that use only simple model evaluations, we suggest using 10^5, 10^6, ... model evaluations for your evidence estimates.
+* For more complex algorithms, you might try to adjust your parameters so that the computational cost is roughly equivalent to the number of core-seconds used by an algorithm with 10^5, 10^6, etc. simple model evaluations.  
+* For the follow-up paper, we may ask you to rerun you existing analysis, adjusting the number of itterations/number of evaluations, so as to make the computational cost comparable to other entries.  
+
+
 ### Working Draft Proposal for Formats of Outputs: Odds Ratio
 * Comma delimited ASCII file (CSV)
-* One row/line per odds-ratio (e.g., 1-planet over 0-planet model, 2-planet over 1-planet model, ...)
+* One row/line for each estimate of the odds-ratio for a pair of models (e.g., 1-planet over 0-planet model, 2-planet over 1-planet model, ...)
    - Include comparisons of (n+1)-planet model to n-planet model, additional comparisons possible, but not necessary and may not be included in analysis
 * Collumns:
+  - Method-specific integer roughly perportional to how much computational effort was used (e.g., number of itterations, number of model evaluations, CPU-seconds; see details in specifications for files with evidence estimates).
   - number of planets in model for denominator of odds ratio (a single integer)
   - number of planets in model for numerator of odds ratio (a single integer)
   - Mode of estimated distribution for the log_10(odds ratio) (may be best point estimate)
@@ -64,4 +90,8 @@ I've drafted a preliminary plan below, and encourage participants to provide fee
   - Estimate for 98% percentile of the distribution for log_10(odds ratio) (analogous to "2-sigma higher")
 * Questions for groups likely to submit estimates of odds ratios.  
   - Is this too much?  If so, how do you propose to submit both an odds-ratio and some measure of uncertainty?
+  
+### Working Draft Proposal for Formats of Additional Notes:
+* ASCCI file (no unicode)
+* For now, we can start with free form text.  If we see some common themes that are worth plotting, then we may ask for additional information to be standardize. 
   
