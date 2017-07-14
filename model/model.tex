@@ -43,6 +43,27 @@ The simulated measurements are the sum of the line-of-sight velocity of the star
 While the full model formally includes mutual planetary interactions, we fully expect that it would be well-described by the linear super-position of zero to three Keplerian orbits plus a constant velocity offset and a noise term.
 For the sake of computational efficiency, we restrict planets to orbital orbital periods ranging from 10 to 9,999 days.
 
+\subsection{Statistical Model}
+\subsubsection{Likelihood}
+Each simulated data point is generated according to
+%
+\begin{equation}
+v_i = v_{\mathrm{pred}}(t_i|\theta) + \epsilon_i,
+\end{equation}
+%
+where $v_{\mathrm{pred}}(t_i|\theta)$ is the velocity predicted at time $t_i$ by a model parameterized by $\theta$, and $\epsilon_i$ is the perturbation to the measurement due to noise.  
+$\bf{\epsilon} \sim \mathrm{Normal}(0,\Sigma)$, i.e., the noise vector, $\bf{\epsilon}$ is drawn from a multivariate process with covariance matrix $\Sigma$.  
+Therefore, the appropriate likelihood ($\mathcal{L}(\theta) = p(\bf{v} | \theta )$) is a multi-variable normal distribution, centered on the predictions of the model (parameterized by $\theta$),
+%
+\begin{equation}
+\log \mathcal{L}(\theta) =  
+-\frac{1}{2} (\mathbf{v}-\mathbf{v}_{\mathrm{pred}}(\theta))^{T} \Sigma^{-1} (\mathbf{v}-\mathbf{v}_{\mathrm{pred}}(\theta)) 
+-\frac{1}{2} \log \left| \mathrm{det} \Sigma \right| 
+-\frac{n_{\mathrm{obs}}}{2} \log (2\pi),
+\end{equation}
+%
+where $\bf{v}$ is the vector of $v_i$'s, and $\mathbf{v}_{\mathrm{pred}}(\theta)$ is the vector of velocities predicted by the model with parameters $\theta$.
+
 The Gaussian noise is correlated from one observation to the next.  
 The covariance matrix, $\Sigma$, is given by 
 \begin{equation}
@@ -64,36 +85,6 @@ where the hyperparameters are fixed at the following values:
 \item $\tau = 20.0$ (days).
 \end{itemize}
 
-\subsection{Statistical Model}
-\subsubsection{Likelihood}
-Each simulated data point is generated according to
-%
-\begin{equation}
-v_i = v_{\mathrm{pred}}(t_i|\theta) + \epsilon_i,
-\end{equation}
-%
-where $v_{\mathrm{pred}}(t_i|\theta)$ is the velocity predicted at time $t_i$ by a model parameterized by $\theta$, and $\epsilon_i$ is the perturbation to the measurement due to noise.  
-$\bf{\epsilon} \sim \mathrm{Normal}(0,\Sigma)$, i.e., the noise vector, $\bf{\epsilon}$ is drawn from a multivariate process with covariance matrix $\Sigma$.  
-Therefore, the appropriate likelihood ($\mathcal{L}(\theta) = p(\bf{v} | \theta )$) is a multi-variable normal distribution, centered on the predictions of the model (parameterized by $\theta$),
-%
-\begin{equation}
-\log \mathcal{L}(\theta) =  
--\frac{1}{2} (\mathbf{v}-\mathbf{v}_{\mathrm{pred}}(\theta))^{T} \Sigma^{-1} (\mathbf{v}-\mathbf{v}_{\mathrm{pred}}(\theta)) 
--\frac{1}{2} \log \left| \mathrm{det} \Sigma \right| 
--\frac{n_{\mathrm{obs}}}{2} \log (2\pi),
-\end{equation}
-%
-where 
-
-Therefore, 
-\begin{equation}
-\mathbf{v} \sim \mathrm{Normal}( \mathbf{v}_{\mathrm{pred}}(\mathbf{t}), \Sigma ),
-\end{equation}
-%
-where $\bf{v}$ is the vector of $v_i$'s, and $\mathbf{v}(\mathbf{t})$ is the vector of true kinematic velocities at the vector of times $\bf{t}$.
-predicted velocities.
-
-
 \subsubsection{Priors}
 
 When computing the Bayesian evidence, we ask that each group adopt a common set of priors described below, so as to enable direct comparisons of their results.  
@@ -108,6 +99,19 @@ We assume a prior that factorizes in terms of each planet's orbital period ($P_i
 \item For the additional white-noise term, $p(\sigma_J) = \frac{1}{1+\sigma_J/\sigma_{J,0}} *  \frac{1}{\log(1+\sigma_{J,max}/\sigma_{J,0})}$ where $\sigma_{J,0}=1$ m/s and $\sigma_{J,max}=99$ m/s.
 \item For the RV velocity offset, $p(C) \sim$ Normal(0 m/s, 100 m/s).
 \end{itemize}
+
+\subsubsection{Prior for over models}
+Remember, the primary purpose is to compare properties of different estimates of the evidence, and not to figure out how many planets are present in the system.  
+Therefore, participants should submit their estimate for the evidence for each of the 0-planet, 1-planet, 2-planet, and 3-planet models, assuming that is the correct model (i.e., not including a prior for the number of planets), {\em regardless of the number of planets that they believe are in the system}.  
+
+In case some participants perform non-Bayesian estimates, it may be useful to have something that can be compared between Bayesian and non-Bayesian estimates.  For purposes of comparisons to analyses that can not report the marginalized likelihood, we may compare the posterior odds ratio to whatever they provide that they think is analogous to a posterior odds ratio.  
+For the purpose of estimating posterior odds ratios, we will use the following prior for the number of planets ($N_{pl}$),
+\begin{eqnarray}
+p(N_{pl}) = & \alpha^{N_{pl}}, \,\, & \mathrm{for} \, N_{pl}={1,2,3} \\
+            & 1-\sum_{i=1}^3 \alpha^i & \mathrm{for} \, N_{pl}=0,
+\end{eqnarray}
+and set $\alpha=\frac{1}{3}$.  
+Any participants submitting non-Bayesian estimates should take this into consideration, so that they can calibrate their estimates appropriately. 
 
 \section{File Formats}
 See the README.md in the data subdirectory for a description of the input data file format.
