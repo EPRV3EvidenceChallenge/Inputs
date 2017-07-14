@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\begin{document}
+
+%\title{Extremely Precise Radial Velocities III Evidence Challenge:  The Physical \& Statistical Model}
+
+\section{Purpose}
+The primary objective of the EPRV3 Evidence Challenge is to compare different algorithms and implementations for performing model comparison.  
+We will provide ~6 simulated radial velocity (RV) datasets, each with zero to three planets.
+Participants will be asked to compute quantitative estimates of Bayesian evidence (also known as the marginalized likelihood) for each model and the estimated uncertainty in each evidence, using whatever computational methods and simplifying assumptions that they choose.
+Participants are encouraged to apply multiple methods to analyze the same datasets and models.  
+
+The evidences for two models (and the same dataset) can be combined to compute the posterior odds ratio for any pair of $n$-planet to $(n+1)$-planet models.  
+Any groups that are unable to estimate the evidence (e.g., using non-Bayesian methods), will be asked to provide estimates of quantities that they consider analogous to the posterior odds ratio.  
+Of course, one should always provide an estimate of the uncertainties in the results that they report.)
+
+We will compare results from different groups and different methods during the breakout sessions of the EPRV3 meeting in August 2017.  
+We hope that this exercise will lead to a better understanding of the advantages and disadvantages of various algorithms, implementations and approaches.  
+We are optimistic that this will lead to a paper describing the results, lessons learned, and recommendations for future studies.
+
+\section{Detailed Model Specification}
+
+In order to facilitate quantitative comparisons, it is important that each group use a standardized set of assumptions for the physical and statistical models.  
+Therefore, we describe the process used to generate the datasets in detail. 
+If you believe it is important to be provided with additional information, please let the organizers know as soon as possible.
+
+\subsection{Dataset Characteristics}
+
+We will provide ~6 simulated datasets with anywhere from zero to three planets in each dataset. 
+The datasets are generated with a set of consistent properties:
+\begin{itemize}
+\item Each dataset is a simple timeseries, including the time of observation ($t_i$), ``measured'' radial velocity ($v_i$), and a measurement uncertainty ($\sigma_i$).  
+\item Number of observations: $n_{\mathrm{obs}}$ = 200
+\item Observing baseline: ~600 days
+\item Each dataset includes between zero and three planets (inclusive), as described below.  
+\item Each dataset includes a single velocity offset and correlated, Gaussian noise to represent stellar activity.  
+\end{itemize}
+
+\subsection{Physical Model}
+%
+In each dataset, the radial velocity of the star ($v(t)$) is computed via n-body integrations using Newtonian gravity, one star and zero to three planets.
+The simulated measurements are the sum of the line-of-sight velocity of the star and Gaussian noise.
+While the full model formally includes mutual planetary interactions, we fully expect that it would be well-described by the linear super-position of zero to three Keplerian orbits plus a constant velocity offset and a noise term.
+For the sake of computational efficiency, we restrict planets to orbital orbital periods ranging from 10 to 9,999 days.
+
+The Gaussian noise is correlated from one observation to the next.  
+The covariance matrix, $\Sigma$, is given by 
+\begin{equation}
+\Sigma_{i,j} = K_{i,j} + \delta_{i,j} \left(\sigma_i^2 + \sigma_{Jitter}^2 \right),
+\end{equation}
+where $K_{i,j}$ is a quasi-periodic kernel, $\delta_{i,j}$ is the Kronecker delta,
+$\sigma_i^2$ is the estimated measurement uncertainty for the $i$th observation, and
+$\sigma_{J}^2$ is the amplitude of an additional, unknown noise term.  
+For the quasi-periodic kernel, we assume
+\begin{equation}
+K_{i,j} = \alpha^2 \exp\left[-\frac{1}{2}\left\{ \frac{\sin^2[\pi(t_i-t_j)/\tau]}{\lambda_p^2} + \frac{(t_i-t_j)^2}{\lambda_e^2}\right\}\right], 
+\end{equation}
+%
+where the hyperparameters are fixed at the following values:
+\begin{itemize}
+\item $\alpha = \sqrt{3}$ m/s,
+\item $\lambda_e = 50.0$ days,
+\item $\lambda_p = 0.5$ (unitless), and
+\item $\tau = 20.0$ (days).
+\end{itemize}
+
+\subsection{Statistical Model}
+\subsubsection{Likelihood}
+Each simulated data point is generated according to
+%
+\begin{equation}
+v_i = v_{\mathrm{pred}}(t_i|\theta) + \epsilon_i,
+\end{equation}
+%
+where $v_{\mathrm{pred}}(t_i|\theta)$ is the velocity predicted at time $t_i$ by a model parameterized by $\theta$, and $\epsilon_i$ is the perturbation to the measurement due to noise.  
+$\bf{\epsilon} \sim \mathrm{Normal}(0,\Sigma)$, i.e., the noise vector, $\bf{\epsilon}$ is drawn from a multivariate process with covariance matrix $\Sigma$.  
+Therefore, the appropriate likelihood ($\mathcal{L}(\theta) = p(\bf{v} | \theta )$) is a multi-variable normal distribution, centered on the predictions of the model (parameterized by $\theta$),
+%
+\begin{equation}
+\log \mathcal{L}(\theta) =  
+-\frac{1}{2} (\mathbf{v}-\mathbf{v}_{\mathrm{pred}}(\theta))^{T} \Sigma^{-1} (\mathbf{v}-\mathbf{v}_{\mathrm{pred}}(\theta)) 
+-\frac{1}{2} \log \left| \mathrm{det} \Sigma \right| 
+-\frac{n_{\mathrm{obs}}}{2} \log (2\pi),
+\end{equation}
+%
+where 
+
+Therefore, 
+\begin{equation}
+\mathbf{v} \sim \mathrm{Normal}( \mathbf{v}_{\mathrm{pred}}(\mathbf{t}), \Sigma ),
+\end{equation}
+%
+where $\bf{v}$ is the vector of $v_i$'s, and $\mathbf{v}(\mathbf{t})$ is the vector of true kinematic velocities at the vector of times $\bf{t}$.
+predicted velocities.
+
+
+\subsubsection{Priors}
+
+When computing the Bayesian evidence, we ask that each group adopt a common set of priors described below, so as to enable direct comparisons of their results.  
+We assume a prior that factorizes in terms of each planet's orbital period ($P_i$), RV semi-amplitude ($K_i$), eccentricity ($e_i$), argument of pericenter ($\omega_i$) and mean anomaly at epoch ($M_i$).
+%
+\begin{itemize}
+\item For each planet's orbital period, $p(P) = \frac{1}{1+P/P0} *  \frac{1}{\log(1+P_{max}/P_0)}$ where $P_0=1$ day and $P_{max}=9,999$ days.
+\item For each planet's RV semi-amplitude, $p(K) = \frac{1}{1+K/K0} *  \frac{1}{\log(1+K_{max}/K_0)}$ where $K_0=1$ m/s and $K_{max}=999$ m/s.
+\item For each planet's eccentricity, $p(e) = 1$ from $0 \leq e < 1$
+\item For each planet's argument of pericenter, $p(\omega) = \frac{1}{2\pi}$ from $0 \leq \omega < 2\pi$ radians.
+\item For each planet's mean anomaly, $p(M) = \frac{1}{2\pi}$ from $0 \leq M < 2\pi$ radians.
+\item For the additional white-noise term, $p(\sigma_J) = \frac{1}{1+\sigma_J/\sigma_{J,0}} *  \frac{1}{\log(1+\sigma_{J,max}/\sigma_{J,0})}$ where $\sigma_{J,0}=1$ m/s and $\sigma_{J,max}=99$ m/s.
+\item For the RV velocity offset, $p(C) \sim$ Normal(0 m/s, 100 m/s).
+\end{itemize}
+
+\section{File Formats}
+See the README.md in the data subdirectory for a description of the input data file format.
+
+We will provide specifications for format of output files to facilitate rapid comparison of the results. 
+
+\end{document}
+
+%
+\begin{equation}
+\end{equation}
+%
+%
+\begin{equation}
+\end{equation}
+%
+
+
+
