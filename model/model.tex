@@ -6,7 +6,7 @@
 
 \section{Purpose}
 The primary objective of the EPRV3 Evidence Challenge is to compare different algorithms and implementations for performing model comparison.  
-We will provide ~6 simulated radial velocity (RV) datasets, each with zero to three planets.
+We will provide $\sim$6 simulated radial velocity (RV) datasets, each with zero to three planets.
 Participants will be asked to compute quantitative estimates of Bayesian evidence (also known as the marginalized likelihood) for each model and the estimated uncertainty in each evidence, using whatever computational methods and simplifying assumptions that they choose.
 Participants are encouraged to apply multiple methods to analyze the same datasets and models.  
 
@@ -26,7 +26,7 @@ If you believe it is important to be provided with additional information, pleas
 
 \subsection{Dataset Characteristics}
 
-We will provide ~6 simulated datasets with anywhere from zero to three planets in each dataset. 
+We will provide $\sim$6 simulated datasets with anywhere from zero to three planets in each dataset. 
 The datasets are generated with a set of consistent properties:
 \begin{itemize}
 \item Each dataset is a simple timeseries, including the time of observation ($t_i$), ``measured'' radial velocity ($v_i$), and a measurement uncertainty ($\sigma_i$).  
@@ -67,7 +67,7 @@ where $\bf{v}$ is the vector of $v_i$'s, and $\mathbf{v}_{\mathrm{pred}}(\theta)
 The Gaussian noise is correlated from one observation to the next.  
 The covariance matrix, $\Sigma$, is given by 
 \begin{equation}
-\Sigma_{i,j} = K_{i,j} + \delta_{i,j} \left(\sigma_i^2 + \sigma_{Jitter}^2 \right),
+\Sigma_{i,j} = K_{i,j} + \delta_{i,j} \left(\sigma_i^2 + \sigma_{J}^2 \right),
 \end{equation}
 where $K_{i,j}$ is a quasi-periodic kernel, $\delta_{i,j}$ is the Kronecker delta,
 $\sigma_i^2$ is the estimated measurement uncertainty for the $i$th observation, and
