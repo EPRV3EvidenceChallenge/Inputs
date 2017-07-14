@@ -1,4 +1,4 @@
-# Extremely Precise Radial Velocities 3:  Evidence Challenges
+# Extremely Precise Radial Velocities 3:  Evidence Challenge
 
 As part of the Third Workshop on Extremely Precise Radial Velocities (http://eprv2017.psu.edu) there will be a breakout group on Computational Methods.  The tenative plan is for there to be three 90 minute working sessions during the meeting, plus whatever time we choose to spend on it before/after the meeting.  We've decided to use this time to conduct a data challenge, where multiple participants/groups compute the Bayesian evidence (i.e., the marginalized likelihood) for models with zero, one, two or three planets for each of ~6 simulated RV data sets.  We will provide detailed information about priors and noise assumptions, so that everyone can use the same physical and statistical model to estimate the same quantities using multiple methods.  We hope that the evidence challenge will help the group and the RV community to learn about the relative strengths and weaknesses of various methods, discuss ideas for improving accuracy or efficiency, and form the basis for a short paper summarizing the results and lessons learned.  
 
