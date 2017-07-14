@@ -12,7 +12,7 @@ Participants are encouraged to apply multiple methods to analyze the same datase
 
 The evidences for two models (and the same dataset) can be combined to compute the posterior odds ratio for any pair of $n$-planet to $(n+1)$-planet models.  
 Any groups that are unable to estimate the evidence (e.g., using non-Bayesian methods), will be asked to provide estimates of quantities that they consider analogous to the posterior odds ratio.  
-Of course, one should always provide an estimate of the uncertainties in the results that they report.)
+Of course, one should always provide an estimate of the uncertainties in the results that they report.
 
 We will compare results from different groups and different methods during the breakout sessions of the EPRV3 meeting in August 2017.  
 We hope that this exercise will lead to a better understanding of the advantages and disadvantages of various algorithms, implementations and approaches.  
@@ -31,7 +31,7 @@ The datasets are generated with a set of consistent properties:
 \begin{itemize}
 \item Each dataset is a simple timeseries, including the time of observation ($t_i$), ``measured'' radial velocity ($v_i$), and a measurement uncertainty ($\sigma_i$).  
 \item Number of observations: $n_{\mathrm{obs}}$ = 200
-\item Observing baseline: ~600 days
+\item Observing baseline: $\sim$600 days
 \item Each dataset includes between zero and three planets (inclusive), as described below.  
 \item Each dataset includes a single velocity offset and correlated, Gaussian noise to represent stellar activity.  
 \end{itemize}
@@ -41,7 +41,7 @@ The datasets are generated with a set of consistent properties:
 In each dataset, the radial velocity of the star ($v(t)$) is computed via n-body integrations using Newtonian gravity, one star and zero to three planets.
 The simulated measurements are the sum of the line-of-sight velocity of the star and Gaussian noise.
 While the full model formally includes mutual planetary interactions, we fully expect that it would be well-described by the linear super-position of zero to three Keplerian orbits plus a constant velocity offset and a noise term.
-For the sake of computational efficiency, we restrict planets to orbital orbital periods ranging from 10 to 9,999 days.
+For the sake of computational efficiency, we restrict the range of injected planet orbital periods to between 10 and 2,400 days.  Note that for the purpose of computing evidences, we ask that you use a prior ranging from orbital periods ranging from 10 to 9,999 days.
 
 \subsection{Statistical Model}
 \subsubsection{Likelihood}
@@ -71,7 +71,7 @@ The covariance matrix, $\Sigma$, is given by
 \end{equation}
 where $K_{i,j}$ is a quasi-periodic kernel, $\delta_{i,j}$ is the Kronecker delta,
 $\sigma_i^2$ is the estimated measurement uncertainty for the $i$th observation, and
-$\sigma_{J}^2$ is the amplitude of an additional, unknown noise term.  
+$\sigma_{J}^2$ is the amplitude of an additional, unknown noise term (often casually referred to as RV ``jitter'').  
 For the quasi-periodic kernel, we assume
 \begin{equation}
 K_{i,j} = \alpha^2 \exp\left[-\frac{1}{2}\left\{ \frac{\sin^2[\pi(t_i-t_j)/\tau]}{\lambda_p^2} + \frac{(t_i-t_j)^2}{\lambda_e^2}\right\}\right], 
