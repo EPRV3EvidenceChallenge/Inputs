@@ -7,8 +7,12 @@ If you would like to receive further information and future communications about
 You are encouraged to share this invitation with colleagues who you think may want to participate in the EPRV3 Evidence Challenge, even if they are not able to attend the EPRV III meeting in person.
 
 Sincerely,
+
 Eric Ford, EPRV III Computation Methods Breakout Session Chair
+
 Ben Nelson, EPRV III Evidence Challenge Coordinator
+
 https://groups.google.com/forum/#!forum/eprv3-evidence-challenge
+
 http://eprv2017.psu.edu
 
