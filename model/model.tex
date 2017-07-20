@@ -41,7 +41,7 @@ The datasets are generated with a set of consistent properties:
 In each dataset, the radial velocity of the star ($v(t)$) is computed via n-body integrations using Newtonian gravity, one star and zero to three planets.
 The simulated measurements are the sum of the line-of-sight velocity of the star and Gaussian noise.
 While the full model formally includes mutual planetary interactions, we fully expect that it would be well-described by the linear super-position of zero to three Keplerian orbits plus a constant velocity offset and a noise term.
-For the sake of computational efficiency, we restrict the range of injected planet orbital periods to between 10 and 2,400 days.  Note that for the purpose of computing evidences, we ask that you use a prior ranging from orbital periods ranging from 10 to 9,999 days.
+For the sake of computational efficiency, we restrict the range of injected planet orbital periods to between 10 and 2,400 days.  Note that for the purpose of computing evidences, we ask that you use a prior ranging from orbital periods ranging from 1 to $10^4$ days.
 
 \subsection{Statistical Model}
 \subsubsection{Likelihood}
@@ -91,7 +91,7 @@ When computing the Bayesian evidence, we ask that each group adopt a common set 
 We assume a prior that factorizes in terms of each planet's orbital period ($P_i$), RV semi-amplitude ($K_i$), eccentricity ($e_i$), argument of pericenter ($\omega_i$) and mean anomaly at epoch ($M_i$), as well as the white-noise terms ($\sigma_J$) and RV offset ($C$).
 %
 \begin{itemize}
-\item For each planet's orbital period, $p(P) \, dP = \frac{dP}{P_0(1+P/P_0)} \times  \frac{1}{\log(1+P_{\max}/P_0)}$ for $0<P\le P_{\max}$, where $P_0=1$ day and $P_{max}=9,999$ days.
+\item For each planet's orbital period, $p(P) \, dP = \frac{dP}{P} \times  \frac{1}{\log(P_{\max}/P_{\min})}$ for $P_{\min} \le P \le P_{\max}$, where $P_{\min}=1$ day and $P_{max}=10^4$ days.
 \item For each planet's RV semi-amplitude, $p(K) \, dK = \frac{dK}{K_0(1+K/K_0)} \times  \frac{1}{\log(1+K_{\max}/K_0)}$ for $0<K\le K_{\max}$, where $K_0=1$ m/s and $K_{max}=999$ m/s.
 \item For each planet's eccentricity, $p(e) \, de = de$ from $0 \leq e < 1$
 \item For each planet's argument of pericenter, $p(\omega) \, d\omega = \frac{d\omega}{2\pi}$ from $0 \leq \omega < 2\pi$ radians.
