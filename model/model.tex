@@ -88,17 +88,25 @@ where the hyperparameters are fixed at the following values:
 \subsubsection{Priors}
 
 When computing the Bayesian evidence, we ask that each group adopt a common set of priors described below, so as to enable direct comparisons of their results.  
-We assume a prior that factorizes in terms of each planet's orbital period ($P_i$), RV semi-amplitude ($K_i$), eccentricity ($e_i$), argument of pericenter ($\omega_i$) and mean anomaly at epoch ($M_i$).
+We assume a prior that factorizes in terms of each planet's orbital period ($P_i$), RV semi-amplitude ($K_i$), eccentricity ($e_i$), argument of pericenter ($\omega_i$) and mean anomaly at epoch ($M_i$), as well as the white-noise terms ($\sigma_J$) and RV offset ($C$).
 %
 \begin{itemize}
-\item For each planet's orbital period, $p(P) = \frac{1}{1+P/P0} *  \frac{1}{\log(1+P_{max}/P_0)}$ where $P_0=1$ day and $P_{max}=9,999$ days.
-\item For each planet's RV semi-amplitude, $p(K) = \frac{1}{1+K/K0} *  \frac{1}{\log(1+K_{max}/K_0)}$ where $K_0=1$ m/s and $K_{max}=999$ m/s.
-\item For each planet's eccentricity, $p(e) = 1$ from $0 \leq e < 1$
-\item For each planet's argument of pericenter, $p(\omega) = \frac{1}{2\pi}$ from $0 \leq \omega < 2\pi$ radians.
-\item For each planet's mean anomaly, $p(M) = \frac{1}{2\pi}$ from $0 \leq M < 2\pi$ radians.
-\item For the additional white-noise term, $p(\sigma_J) = \frac{1}{1+\sigma_J/\sigma_{J,0}} *  \frac{1}{\log(1+\sigma_{J,max}/\sigma_{J,0})}$ where $\sigma_{J,0}=1$ m/s and $\sigma_{J,max}=99$ m/s.
-\item For the RV velocity offset, $p(C) \sim$ Normal(0 m/s, 100 m/s).
+\item For each planet's orbital period, $p(P) \, dP = \frac{dP}{P_0(1+P/P_0)} \times  \frac{1}{\log(1+P_{\max}/P_0)}$ for $0<P\le P_{\max}$, where $P_0=1$ day and $P_{max}=9,999$ days.
+\item For each planet's RV semi-amplitude, $p(K) \, dK = \frac{dK}{K_0(1+K/K_0)} \times  \frac{1}{\log(1+K_{\max}/K_0)}$ for $0<K\le K_{\max}$, where $K_0=1$ m/s and $K_{max}=999$ m/s.
+\item For each planet's eccentricity, $p(e) \, de = de$ from $0 \leq e < 1$
+\item For each planet's argument of pericenter, $p(\omega) \, d\omega = \frac{d\omega}{2\pi}$ from $0 \leq \omega < 2\pi$ radians.
+\item For each planet's mean anomaly, $p(M) \, dM = \frac{dM}{2\pi}$ from $0 \leq M < 2\pi$ radians.
+\item For the additional white-noise term, $p(\sigma_J) \, d\sigma_J = \frac{\sigma_J}{\sigma_{J,0}(1+\sigma_J/\sigma_{J,0})} \times  \frac{1}{\log(1+\sigma_{J,\max}/\sigma_{J,0})}$ for $0<\sigma_{J,0} \le \sigma_{J,\max}$, where $\sigma_{J,0}=1$ m/s and $\sigma_{J,\max}=99$ m/s.
+\item For the RV velocity offset, $p(C) \, dC = \frac{dC}{2C_{\max}}$ from $-C_{\max} \le C \le C_{\max}$, where $C_{\max} = 1,000$ m/s.
 \end{itemize}
+%
+Thus, the combined prior for a given model (i.e., number of planets, $N_{pl}$) is
+%
+\begin{equation}
+p\left(\left\{P_i,K_i,e_i,\omega_i,M_i\right\}_{i=1..N_{pl}}, \sigma_J, C \right) =
+p(\sigma_J) p(C) \prod_{i=1}^{N_{pl}} p(P_i) p(K_i) p(e_i) p(\omega_i) p(M_i).
+\end{equation}
+%
 
 \subsubsection{Prior for over models}
 Remember, the primary purpose is to compare properties of different estimates of the evidence, and not to figure out how many planets are present in the system.  
