@@ -11,8 +11,7 @@ I've drafted a preliminary plan below, and encourage participants to provide fee
 * Alternatively, for methods that do not provide an estimate of the evidence, teams can submit a file with their estimates of the odds ratios comparing n-planet and (n+1)-planet models, in files named oddsratio_0001.txt, oddsratio_0002.txt, etc.
 * In the subfolder for each team-method, benchmarking results for each model (i.e., 0, 1, 2, and 3 planets) should be provided in one file per dataset, named benchmarks_0001.txt, benchmarks_0002.txt, etc., where the number matches the number from the input dataset (e.g., rvs_0001.txt -> benchmarks_0001.txt).  
 * Teams are encouraged but not required to submit estimates of key model parameters in a seprate file for each model, named params_0_0001.txt, params_1_0001.txt, etc., where the first number is the number of planets assumed and the second number matches the number from the input dataset (e.g., rvs_0001.txt assuming 2 planets -> params_2_0001.txt).  
-* In the subfolder for each team-method, notes describing the method, assumptions, approximations, references, etc. are to go in a file named README.md which can be either a plain ASCII text file or make use of [github Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) is ok).
-* For notes particular to one particular dataset, place them in the above readme, using an "H3" section header with name "Dataset N", where N is the number of the dataset by placing 3 hashmarks at the beginning of the line.  E.g., ```### Dataset 1```.
+* In the subfolder for each team-method, notes describing the method, assumptions, approximations, references, etc. are to go in a file named README.md .
 * Teams are encouraged to submit results via git by creating a pull request containing their submissions.  If you're not comfortable with git, then we'll provide a place that you can upload a zip file.  
 
 ### Working Draft Proposal for Formats of Outputs: Evidences
@@ -95,6 +94,8 @@ I've drafted a preliminary plan below, and encourage participants to provide fee
   - Is this too much?  If so, how do you propose to submit both an odds-ratio and some measure of uncertainty?
   
 ### Working Draft Proposal for Formats of Additional Notes:
-* ASCCI file (no unicode)
-* For now, we can start with free form text.  If we see some common themes that are worth plotting, then we may ask for additional information to be standardize. 
+* README.md can be either ASCCI file (no unicode) or make use of [github Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
+* Begin with notes about the method in general.
+* For notes particular to one particular dataset, place them in the above readme, using an "H3" section header with name "Dataset N", where N is the number of the dataset by placing 3 hashmarks at the beginning of the line.  E.g., ```### Dataset 1```.
+* Otherwise, we can start with free form text.  If we see some common themes that are worth plotting, then we may ask for additional information to be standardize. 
   
