@@ -63,6 +63,7 @@ Therefore, the appropriate likelihood ($\mathcal{L}(\theta) = p(\bf{v} | \theta 
 \end{equation}
 %
 where $\bf{v}$ is the vector of $v_i$'s, and $\mathbf{v}_{\mathrm{pred}}(\theta)$ is the vector of velocities predicted by the model with parameters $\theta$.
+Throughout this document, we use $\log$ to denote the natural logarithm, not base 10. 
 
 The Gaussian noise is correlated from one observation to the next.  
 The covariance matrix, $\Sigma$, is given by 
@@ -100,6 +101,7 @@ We assume a prior that factorizes in terms of each planet's orbital period ($P_i
 \item For the RV velocity offset, $p(C) \, dC = \frac{dC}{2C_{\max}}$ from $-C_{\max} \le C \le C_{\max}$, where $C_{\max} = 1,000$ m/s.
 \end{itemize}
 %
+Remeber that $\log$ refers to the natural logarithm.
 Thus, the combined prior for a given model (i.e., number of planets, $N_{pl}$) is
 %
 \begin{equation}
