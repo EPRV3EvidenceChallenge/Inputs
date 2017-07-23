@@ -6,7 +6,8 @@ Each dataset will be provided as a single ASCII, space delimited file, with one 
 Each line will have a time (in days), an estimated velocity (in m/s), and an estimated measurement uncertainty (in m/s).
 
 For the purposes of getting started, the first data file (rvs_00001.txt) was made avaliable immediately.  
-The next set of data files was provided late July 21/early July 22, 2017.  We hope that EPRV3 participants will analyze each of these prior to EPRV3 meeting and comparing results during breakout sessions.
+The next set of data files (2-5) was provided late July 21/early July 22, 2017, and a sixth file was provided July 23, 2017.  
+We hope that EPRV3 participants will analyze each of these prior to EPRV3 meeting and comparing results during breakout sessions.
 Depending on results and feedback received, we may consider adding a few additional datasets either prior or after the EPRV3 meeting.  
 
 # Data Files
@@ -15,5 +16,5 @@ Depending on results and feedback received, we may consider adding a few additio
 - rvs_0003.txt:  ...
 - rvs_0004.txt:  ...
 - rvs_0005.txt:  ...
-- rvs_0006.txt:  Potentially coming prior to EPRV3
+- rvs_0006.txt:  ...
 
