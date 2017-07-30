@@ -2,7 +2,7 @@
 
 Members: *J. Buchner & S. Rukdee*
 
-We explore methods based on nested sampling. Our likelihood is implemented with george (Ambikasaran+14) and code adapted from ExoFit (Balan&Lahav08).
+We explore methods based on nested sampling. Our likelihood is implemented with george (Ambikasaran+14) and code adapted from ExoFit (Balan&Lahav08). To reduce the number of solutions, we impose ordering on the planet periods.
 
 Nested sampling is an integration technique which explores the volume above a given likelihood threshold. That threshold is continuously increased, such that the volume decreases by a constant factor (exponential shrinkage). This allows nested sampling to keep track of the volume and likelihood value for making a Lebesgue integral. At a late point, the volume is small and the likelihood flat, so that the remainder does not contribute to the integral and the algorithm terminates.
 
