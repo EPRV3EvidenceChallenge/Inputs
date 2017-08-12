@@ -30,4 +30,19 @@
 * Test what fraction of samples have eccentricities < 1.  
 * Currently, add eccentricities "all-at-once", rather than one-at-a-time.
 
+## Method 3 (laplace_keplerian):
+* Similar to methods 1 and 2, except we use a linear superposition of Keplerian orbits for the RV model
+* First, use estimated orbital periods and sigma_j from outputs of Method 2
+* Technically, am using phases, but I don't think I've coded it right, so for now, it's researching over phases and omega within the Keplerian model
+* Optimize all model parameteres except sigma_j.  
+* Evaluate Fischer Information Matrix at local mode and compute Laplace approximation to the log marginal posterior.
+* Note that for now, we used Laplace approximation to marginalize over sigma_j, rather than the more accurate Gauss-Legendre method that was used in Methods 2 and 3. (This is just due to bug in scripts.) 
+
+
+## Notes
+* As we go from method 1 to method 3, we are using a more accurate approximation of the RV model.  In theory, this would allow for more accurate estimates of the marginalized posterior.  However, the increased model complexity also means that the processes for identifying the global mode become less robust.  Thus, there is an increased risk of a result that deviates significantly from it the true global mode had been identified.  
+* I suspect that the algorithms probably work quite well for readily detectable planets, since the marginalized posterior is very likely dominated by a single mode. 
+* However, I anticipate that the method 3 will give inaccurate results when there are weak detections or non-detections, since multiple modes are likely to contribute significantly to the marginalized posterior in such cases.
+* The results submitted were all computed automatically, without any human help in identifying or deciding between local maximum, deciding if the fit was any good, or even looking at the dataset.  Obviously, one would want to look at the data and perform some form of model evaluation before presenting results for any real science application.  
+* The heuristics for finding the global mode were not based on a mature pipeline, but written just for this test in a couple of days.  Thus, they are not mature and may be succeptible to missing the global mode.  I suspect that any significantly spurious results of the Keplerian model could be corrected with either a little human help or more robust algorithm for choosing the starting parameters for the optimizer.  
 
