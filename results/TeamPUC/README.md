@@ -34,5 +34,37 @@ The results can be found in
 * multinest-ins-nlive400-eff0.01
 * multinest-ins-nlive2000-eff0.3
 
+## Importance Sampling
+
+This technique is not based on nested sampling, but on importance sampling
+with variational Bayes to perform the integration.
+
+We used the pypmc package (https://zenodo.org/badge/latestdoi/15123/fredRos/pypmc) and the technique described in Beaujean&Caldwell13.
+
+In detail the technique is as follows:
+
+* Step 1: Identify likelihood maxima. The original technique used several MCMC chains, here I re-used the multinest run to obtain initial posterior points. This just serves to identify a initial mixture density.
+* Step 2: Generate an initial proposal mixture density from the chains (make_r_gaussmix). 
+* Step 3: Run Variational Bayes to optimize the proposal mixture density
+* Step 4: Create a Importance Sampler. Set N=n_params*1000.
+* Step 5: Loop, incrementing i from 0:
+  * draw N importance samples.
+  * If integral uncertainty is below the threshold deltalnZ~0.8 and the effective sampling size is above 100, terminate.
+  * Otherwise: Increase N by 1.4 (samples drawn increases exponentially)
+  * Update the proposal mixture density with Variational Bayes
+  * If i mod 3 is 2 (i.e. every third loop), the previous is not done. Instead, the proposal mixture density is recreated from scratch, but with one more MCMC chain. That MCMC chain is started from the point with the highest weight, after a simple optimization step. 
+
+A problem with applying Variational Bayes iteratively to improve the effective sample size is that the number of components can not increase. So if a new small peak is discovered, VB typically does not place a component there. To solve these two problems, we recreate the mixture from scratch (with up to 10 components). The local MCMC run helps identifying the size of the possible new component. In the subsequent iteration, *all* previous samples are used to optimized the mixture, and the number of components can shrink drastically again.
+
+The technique could still be optimized. For example, Step 1 could be replaced by another global search technique (Differential evolution, or multiple MCMC chains) to be less cost-intensive than MULTINEST. However, the current setup seems to work robustly.
+
+Our total number of likelihood evaluations include the MULTINEST prerun (multinest-ins-nlive2000-eff0.3), but not yet the brief optimizations (which are a fraction, ~1000 likelihood evaluations). The Variational Bayes cost is quite small compared to the likelihood evaluations.
+
+These results can be found in:
+
+* importance-sampling
+
+
+
 
 
