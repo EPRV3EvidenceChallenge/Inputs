@@ -14,3 +14,6 @@ The estimator requires the density of the marginal likelihood of each parameter 
 The production of samples from the importance sampling function is done shuffling a sample from the joint posterior obtained previously with an  MCMC algorithm (emcee, in this case).
 
 We run the code taking 5000 samples from the importance sampling function. The Perrakis estimator is biased, so it should be verified that convergence was reached. I usually do this by computing the estimator for different sizes on samples from the importance sampling function, and study the evolution of the result. Although I didn't do this in this case, I checked that doubling the sample size did not change the value of the estimator significantly.
+
+### Computing time
+As we repeated the computation 2000 times to estimate the distribution of log10(Z), I've used 5000x2000 for benchmark, as is the number of calls to the likeihood function that are needed
