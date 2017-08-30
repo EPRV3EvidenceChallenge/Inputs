@@ -1,6 +1,6 @@
 # Model description for the EPRV3 Evidence Challenge
 
-The full specifications for the model and choices of priors are given in [model.tex](./model.tex) and [model.pdf](./model.pdf).  **Note, we still need to update the model.tex to reflect the Rayleigh prior for eccentricity and change so that P_min = 1.25 days.**
+The full specifications for the model and choices of priors are given in [model.tex](./model.tex) and [model.pdf](./model.pdf). 
 
 Note that in responce to suggestions from Evidence Chalelnge participants, we updated the priors to be used for the EPRV3 evidence challenge on 7/20/2017 and again on 8/14/2017.
 - The prior for eccentricity is now a truncated Rayleigh distribution with Rayleigh scale parameter, sigma = 0.2, and truncated to be less than unity.  Note that this can also be expressed as assigning priors for e sin(omega) and e cos(omega) that are iid Gaussians with zero mean and standard deviation sigma, and then rejecting samples with e^2.  
