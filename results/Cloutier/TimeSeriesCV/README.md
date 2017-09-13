@@ -23,7 +23,7 @@
 * The ratio of competing model median lnLs can be treated similarly to a Bayes factor and used for model comparison in this way. 
 * Any questions regarding the methodology and how the results are used for model comparison should be directed to cloutier@astro.utoronto.ca
 
-## Issues
+## Issues (RESOLVED)
 * Model parameter optimizations in each split of the data are performed on a supercomputer to make the computation more tractable
 * Recently, issues with the job submission procedure to that supercomputer have arised and so far prevented the calculation of results for RVdata0002.
 * The source of this error is currently being investigated but may not be resolved before the deadline of September 14th.
