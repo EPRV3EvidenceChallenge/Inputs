@@ -15,8 +15,9 @@
   - Plenary summary #2:  Summarize important issues identified. 
   - Breakout session #3:  Compare computational cost of methods providing high quality evidence estimates.  Discuss potential ways to improve performance.  Make action items to bring to publication.  
   - Final plenary summary:  Summarize results, lessons learned and plans for preparing publication. ~~
-* Sept 14:  Proposed deadline to submit revised results for including in publication
-* Oct 15:  Target date to circulate first draft of manuscript.  
+* ~~Sept 14:  Original deadline to submit revised results for including in publication~~
+* Sept 29:  Revised deadline to submit revised results for including in publication
+* Oct 29:  Target date to circulate first draft of manuscript. 
 
 All dates are subject to change, particularly those after the EPRV3 meeting, as we will incorporate lessons learned from the exercise and feedback from the participants on where they would like the project to go.
 
