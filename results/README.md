@@ -60,6 +60,7 @@ Results from the EPRV3 Evidence Challenge will go in subdirectories of this fold
 * One row/line for each estimate of the evidecne for each model (i.e., 0, 1, 2, and 3 planets) 
 * Collumns:
   - Method-specific integer roughly perportional to how much computational effort was used; see details in specifications for files with evidence estimates).
+  - How many planets were used for this line (a single integer)
   - number of evaluations of the full likelihood performed
   - number of evaluations of the gradient of the likelihood performed (probably 0 for most entries)
   - number of evaluations of the hessian of the likelihood performed (probably 0 for most entries)
