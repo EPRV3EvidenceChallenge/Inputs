@@ -1,0 +1,4 @@
+# Number of lnL evaluations, planet model denominator, planet model numerator, mode log10(odds ratio), median log10(odds ratio), minus 2 sigma (not used), minus 1 sigma, plus 1 sigma, plus 2 sigma (not used)
+1.6E+07,0,1,17.549655,17.549655,NaN,2.672230,2.672230,NaN
+1.6E+07,1,2,13.553605,13.553605,NaN,2.307381,2.307381,NaN
+1.6E+07,2,3,-17.048117,-17.048117,NaN,2.796629,2.796629,NaN
