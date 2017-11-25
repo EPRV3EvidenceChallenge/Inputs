@@ -1,0 +1,5 @@
+# Number of lnL evaluations, number of planets, mode (not used), median lnL per measurement, minus 2 sigma (not used), median absolute deviation of the median lnL per measurement, median absolute deviation of the median lnL per measurement, plus 2 sigma (not used)
+1.6E+07,0,NaN,-1.90721471e+00,NaN,1.34836822e-02,1.34836822e-02,NaN
+1.6E+07,1,NaN,-2.07788151e+00,NaN,2.99555683e-02,2.99555683e-02,NaN
+1.6E+07,2,NaN,-1.94876472e+00,NaN,2.75478902e-02,2.75478902e-02,NaN
+1.6E+07,3,NaN,-1.98876225e+00,NaN,3.52256605e-02,3.52256605e-02,NaN
