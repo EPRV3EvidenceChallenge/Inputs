@@ -1,5 +1,0 @@
-# Number of lnL evaluations, number of planets, median lnL per measurement, median absolute deviation of the median lnL per measurement
-1.6E+07,0,-1.97583222e+00,1.72556022e-02
-1.6E+07,1,-1.92923690e+00,1.53254880e-02
-1.6E+07,2,-1.92946715e+00,1.52188681e-02
-1.6E+07,3,-1.97090591e+00,1.73594709e-02
