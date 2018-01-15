@@ -11,7 +11,7 @@
 
 * We report periods with a precision of four digits, which correspond to the maxima of the l1 periodogram, we obviously do not have such a resolution in general. 
 
-## Evidences
+Computation of evidences
 
-Laplace approximation with second order derivative at maximum likelihood (not maximum a posteriori), see Kass & Raftery formula 5.
+Laplace approximation with second order derivative at maximum likelihood (not maximum a posteriori), see Kass & Raftery (1995) formula 5.
 Maximum likelihood found by initializing a non linear Keplerian fit at the periods found by the l1 periodogram.
